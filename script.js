@@ -1,9 +1,7 @@
-// Convierte grados a radianes
 function toRad(deg) {
   return deg * Math.PI / 180;
 }
 
-// Calcula tensiones T1, T2, T3 con fórmula analítica
 function resolverTensiones(anguloA, anguloB, masa, g = 10) {
   const a = toRad(anguloA);
   const b = toRad(anguloB);
@@ -21,17 +19,15 @@ function resolverTensiones(anguloA, anguloB, masa, g = 10) {
   return { t1, t2, t3, a, b };
 }
 
-// Dibuja vectores T1 (azul), T2 (verde), T3 (rojo) en un canvas
 function graficarDirecciones(a, b) {
   const canvas = document.getElementById("canvasGrafico");
   const ctx = canvas.getContext("2d");
   const w = canvas.width, h = canvas.height;
   const origX = w / 2, origY = h / 2;
-  const scale = 100; // 1 unidad = 100 px
+  const scale = 100;
 
   ctx.clearRect(0, 0, w, h);
 
-  // Ejes
   ctx.strokeStyle = "#888";
   ctx.beginPath();
   ctx.moveTo(0, origY);
@@ -40,7 +36,6 @@ function graficarDirecciones(a, b) {
   ctx.lineTo(origX, h);
   ctx.stroke();
 
-  // Flecha
   function arrow(theta, color) {
     const dx = Math.cos(theta) * scale;
     const dy = Math.sin(theta) * scale;
@@ -51,7 +46,6 @@ function graficarDirecciones(a, b) {
     ctx.lineTo(origX + dx, origY - dy);
     ctx.stroke();
 
-    // Cabeza de flecha
     const headlen = 10;
     const angle = Math.atan2(-dy, dx);
     ctx.beginPath();
@@ -73,7 +67,6 @@ function graficarDirecciones(a, b) {
   arrow(-Math.PI/2, "red");
 }
 
-// Manejador del formulario
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
   const A = parseFloat(document.getElementById("anguloA").value);
@@ -81,8 +74,7 @@ document.getElementById("form").addEventListener("submit", e => {
   const M = parseFloat(document.getElementById("masa").value);
   const out = document.getElementById("resultado");
 
-  out.innerHTML = '';  // Limpia
-
+  out.innerHTML = ''; 
   const contRes = document.createElement('div');
 
   try {
