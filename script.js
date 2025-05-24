@@ -71,15 +71,15 @@ document.getElementById("form").addEventListener("submit", e => {
   const M = parseFloat(document.getElementById("masa").value);
   const out = document.getElementById("resultado");
 
-  try {
-    const { t1, t2, t3, a, b } = resolverTensiones(A, B, M);
-    out.innerHTML = `
-      <h2>Resultados</h2>
-      <p><strong>T1:</strong> ${t1.toFixed(2)} N</p>
-      <p><strong>T2:</strong> ${t2.toFixed(2)} N</p>
-      <p><strong>T3:</strong> ${t3.toFixed(2)} N</p>
-    `;
-    graficarDirecciones(a, b);
+try {
+  const { t1, t2, t3, a, b } = resolverTensiones(A, B, M);
+  out.innerHTML = `
+    <h2>Resultados</h2>
+    <p><strong>T1:</strong> ${Math.abs(t1).toFixed(2)} N</p>
+    <p><strong>T2:</strong> ${t2.toFixed(2)} N</p>
+    <p><strong>T3:</strong> ${t3.toFixed(2)} N</p>
+  `;
+  graficarDirecciones(a, b);
   } catch (err) {
     out.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
 
