@@ -74,12 +74,11 @@ document.getElementById("form").addEventListener("submit", e => {
   const M = parseFloat(document.getElementById("masa").value);
   const out = document.getElementById("resultado");
 
-  out.innerHTML = ''; 
+  out.innerHTML = '';
   const contRes = document.createElement('div');
 
   try {
     const { t1, t2, t3, a, b } = resolverTensiones(A, B, M);
-
     contRes.innerHTML = `
       <h2>Resultados</h2>
       <p><strong>T1:</strong> ${Math.abs(t1).toFixed(2)} N</p>
