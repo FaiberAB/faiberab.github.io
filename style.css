@@ -14,28 +14,48 @@ body {
   text-align: center;
 }
 
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header h2 {
+  margin: 0.2rem 0;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #a0aec0;
+}
+
 .header .social a {
   color: #63b3ed;
   text-decoration: none;
+  display: inline-block;
+  margin-top: 0.5rem;
 }
 
 .contenedor {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
   padding: 2rem;
+  max-width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
-.formulario, .resultado {
+.formulario,
+.resultado {
+  flex: 1 1 45%;
+  min-width: 280px;
   background: white;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  width: 300px;
 }
 
-.formulario h2, .resultado h2 {
+.formulario h2,
+.resultado h2 {
   margin-top: 0;
 }
 
