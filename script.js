@@ -15,8 +15,8 @@ function resolverTensiones(anguloA, anguloB, masa, g = 10) {
     throw new Error("Ángulos A y B no pueden ser iguales o muy cercanos.");
   }
 
-  const t2 = -1*peso * Math.cos(a) / delta;
-  const t1 = peso * Math.cos(b) / delta;
+  const t2 = peso * Math.cos(a) / delta;
+  const t1 = -1*peso * Math.cos(b) / delta;
   const t3 = peso;
 
   return { t1, t2, t3, a, b };
