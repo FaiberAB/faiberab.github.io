@@ -2,71 +2,76 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  padding: 20px;
+  background: #eef2f5;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
+  background: #1a202c;
+  color: white;
+  padding: 1rem;
   text-align: center;
-  margin-bottom: 30px;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.header h1 {
-  margin: 0;
-  color: #333;
-}
-
-.social a {
-  color: #E1306C;
+.header .social a {
+  color: #63b3ed;
   text-decoration: none;
-  font-weight: bold;
-}
-
-.social a:hover {
-  text-decoration: underline;
 }
 
 .contenedor {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .formulario, .resultado {
-  width: 48%;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 300px;
 }
 
-input, button {
+.formulario h2, .resultado h2 {
+  margin-top: 0;
+}
+
+.formulario label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+}
+
+.formulario input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
+  padding: 0.4rem;
+  margin-bottom: 0.8rem;
   border: 1px solid #ccc;
-  font-size: 16px;
+  border-radius: 4px;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
+.formulario button {
+  width: 100%;
+  padding: 0.6rem;
   border: none;
+  background: #3182ce;
+  color: white;
+  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.formulario button:hover {
+  background: #2b6cb0;
 }
 
-img {
-  max-width: 100%;
-  margin-top: 10px;
+.resultado canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 4px;
 }
