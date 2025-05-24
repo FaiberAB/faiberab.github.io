@@ -1,16 +1,13 @@
-// Convierte grados a radianes
 function toRad(deg) {
   return deg * Math.PI / 180;
 }
 
-// Calcula tensiones T1, T2, T3 con fórmula analítica
 function resolverTensiones(anguloA, anguloB, masa, g = 10) {
   const a = toRad(anguloA);
   const b = toRad(anguloB);
   const peso = masa * g;
   const delta = Math.sin(b - a);
 
-  // Evitamos división por cero
   if (Math.abs(delta) < 1e-6) {
     throw new Error("Ángulos A y B no pueden ser iguales o muy cercanos.");
   }
@@ -22,7 +19,6 @@ function resolverTensiones(anguloA, anguloB, masa, g = 10) {
   return { t1, t2, t3, a, b };
 }
 
-// Dibuja vectores T1 (azul), T2 (verde), T3 (rojo) en un canvas
 function graficarDirecciones(a, b) {
   const canvas = document.getElementById("canvasGrafico");
   const ctx = canvas.getContext("2d");
@@ -30,7 +26,6 @@ function graficarDirecciones(a, b) {
   const origX = w / 2, origY = h / 2;
   const scale = 100; // 1 unidad = 100 px
 
-  // Limpia el canvas
   ctx.clearRect(0, 0, w, h);
 
   // Dibuja ejes
@@ -42,7 +37,6 @@ function graficarDirecciones(a, b) {
   ctx.lineTo(origX, h);
   ctx.stroke();
 
-  // Función para dibujar una flecha
   function arrow(theta, color) {
     const dx = Math.cos(theta) * scale;
     const dy = Math.sin(theta) * scale;
@@ -52,7 +46,7 @@ function graficarDirecciones(a, b) {
     ctx.moveTo(origX, origY);
     ctx.lineTo(origX + dx, origY - dy);
     ctx.stroke();
-    // punta de flecha
+    
     const headlen = 10;
     const angle = Math.atan2(-dy, dx);
     ctx.beginPath();
@@ -65,13 +59,11 @@ function graficarDirecciones(a, b) {
     ctx.fill();
   }
 
-  // T1 en azul, T2 en verde, T3 (peso) hacia abajo en rojo
   arrow(a,   "blue");
   arrow(b,   "green");
   arrow(-Math.PI/2, "red");
 }
 
-// Manejador del formulario
 document.getElementById("form").addEventListener("submit", e => {
   e.preventDefault();
   const A = parseFloat(document.getElementById("anguloA").value);
@@ -90,7 +82,7 @@ document.getElementById("form").addEventListener("submit", e => {
     graficarDirecciones(a, b);
   } catch (err) {
     out.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
-    // limpia gráfico
+
     document.getElementById("canvasGrafico")
             .getContext("2d")
             .clearRect(0, 0, 400, 400);
