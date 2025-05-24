@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Tensiones</title>
-  <link rel="stylesheet" href="/style.css">
+  <title>Calculadora de Tensiones (JS)</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -17,32 +17,24 @@
 <div class="contenedor">
   <div class="formulario">
     <h2>Ingresa los datos</h2>
-    <form method="POST">
+    <form id="form">
       <label>Ángulo A (°):</label>
-      <input type="number" name="anguloA" required>
+      <input type="number" id="anguloA" name="anguloA" required>
       <label>Ángulo B (°):</label>
-      <input type="number" name="anguloB" required>
+      <input type="number" id="anguloB" name="anguloB" required>
       <label>Masa (kg):</label>
-      <input type="number" name="masa" required>
+      <input type="number" id="masa" name="masa" required>
       <button type="submit">Calcular</button>
     </form>
   </div>
 
-  <div class="resultado">
-    {% if mostrar %}
-      <h2>Resultados</h2>
-      <p><strong>T1:</strong> {{ t1 }} N</p>
-      <p><strong>T2:</strong> {{ t2 }} N</p>
-      <p><strong>T3:</strong> {{ t3 }} N</p>
-
-      <img src="/grafico.png?v={{ t1 }}" alt="Gráfico de tensiones">
-    {% endif %}
-    
-    {% if error %}
-      <p style="color:red;">Error: {{ error }}</p>
-    {% endif %}
+  <div class="resultado" id="resultado">
+    <!-- Aquí inyectaremos resultados -->
   </div>
 </div>  
 
+<canvas id="canvasGrafico" width="400" height="400"></canvas>
+
+<script src="script.js"></script>
 </body>
 </html>
