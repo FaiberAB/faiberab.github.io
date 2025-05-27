@@ -45,6 +45,18 @@ document.getElementById("tensionForm").addEventListener("submit", function (e) {
   const centerY = canvas.height / 2;
   const escala = 140;
 
+  // Dibujar plano cartesiano
+  ctx.beginPath();
+  ctx.moveTo(0, centerY);
+  ctx.lineTo(canvas.width, centerY);
+  ctx.moveTo(centerX, 0);
+  ctx.lineTo(centerX, canvas.height);
+  ctx.strokeStyle = "#999";
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
   function dibujarFlecha(x0, y0, x1, y1, color, etiqueta) {
     ctx.beginPath();
     ctx.moveTo(x0, y0);
