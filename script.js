@@ -1,102 +1,81 @@
-function toRad(deg) {
-  return deg * Math.PI / 180;
-}
+document.getElementById("tensionForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-function resolverTensiones(anguloA, anguloB, masa, g = 10) {
-  const a = toRad(anguloA);
-  const b = toRad(anguloB);
+  const anguloA = parseFloat(e.target.anguloA.value);
+  const anguloB = parseFloat(e.target.anguloB.value);
+  const masa = parseFloat(e.target.masa.value);
+  const g = 10;
   const peso = masa * g;
-  const delta = Math.sin(b - a);
 
-  if (Math.abs(delta) < 1e-6) {
-    throw new Error("Ángulos A y B no pueden ser iguales o muy cercanos.");
+  const a = anguloA * Math.PI / 180;
+  const b = anguloB * Math.PI / 180;
+
+  function ecuacionT2(t2) {
+    const t1 = (-Math.cos(b) * t2) / Math.cos(a);
+    return (t1 * Math.sin(a) + t2 * Math.sin(b)) - peso;
   }
 
-  const t2 = peso * Math.cos(a) / delta;
-  const t1 = peso * Math.cos(b) / delta;
+  function fsolve(func, guess) {
+    let x = guess;
+    for (let i = 0; i < 100; i++) {
+      const fx = func(x);
+      const dfx = (func(x + 1e-6) - fx) / 1e-6;
+      x = x - fx / dfx;
+      if (Math.abs(fx) < 1e-6) break;
+    }
+    return x;
+  }
+
+  const t2 = fsolve(ecuacionT2, 10);
+  const t1 = Math.abs((-Math.cos(b) * t2) / Math.cos(a)); 
   const t3 = peso;
 
-  return { t1, t2, t3, a, b };
-}
+  document.getElementById("t1").textContent = t1.toFixed(2);
+  document.getElementById("t2").textContent = t2.toFixed(2);
+  document.getElementById("t3").textContent = t3.toFixed(2);
+  document.getElementById("anguloT1").textContent = anguloA;
+  document.getElementById("anguloT2").textContent = anguloB;
+  document.getElementById("resultado").style.display = "block";
 
-function graficarDirecciones(a, b) {
-  const canvas = document.getElementById("canvasGrafico");
+  const canvas = document.getElementById("grafico");
   const ctx = canvas.getContext("2d");
-  const w = canvas.width, h = canvas.height;
-  const origX = w / 2, origY = h / 2;
-  const scale = 100;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.clearRect(0, 0, w, h);
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const escala = 100;
 
-  ctx.strokeStyle = "#888";
-  ctx.beginPath();
-  ctx.moveTo(0, origY);
-  ctx.lineTo(w, origY);
-  ctx.moveTo(origX, 0);
-  ctx.lineTo(origX, h);
-  ctx.stroke();
-
-  function arrow(theta, color) {
-    const dx = Math.cos(theta) * scale;
-    const dy = Math.sin(theta) * scale;
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
+  function dibujarFlecha(x0, y0, x1, y1, color, etiqueta) {
     ctx.beginPath();
-    ctx.moveTo(origX, origY);
-    ctx.lineTo(origX + dx, origY - dy);
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
     ctx.stroke();
 
-    const headlen = 10;
-    const angle = Math.atan2(-dy, dx);
+    const ang = Math.atan2(y1 - y0, x1 - x0);
+    const flechaTamaño = 10;
     ctx.beginPath();
-    ctx.moveTo(origX + dx, origY - dy);
-    ctx.lineTo(
-      origX + dx - headlen * Math.cos(angle - Math.PI/6),
-      origY - dy - headlen * Math.sin(angle - Math.PI/6)
-    );
-    ctx.lineTo(
-      origX + dx - headlen * Math.cos(angle + Math.PI/6),
-      origY - dy - headlen * Math.sin(angle + Math.PI/6)
-    );
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x1 - flechaTamaño * Math.cos(ang - 0.3), y1 - flechaTamaño * Math.sin(ang - 0.3));
+    ctx.lineTo(x1 - flechaTamaño * Math.cos(ang + 0.3), y1 - flechaTamaño * Math.sin(ang + 0.3));
     ctx.closePath();
+    ctx.fillStyle = color;
     ctx.fill();
+
+    ctx.fillStyle = color;
+    ctx.font = "14px Arial";
+    ctx.fillText(etiqueta, x1 + 5, y1 + 5);
   }
 
-  arrow(a, "blue");
-  arrow(b, "green");
-  arrow(-Math.PI/2, "red");
-}
+  const T1_x = Math.cos(a) * escala;
+  const T1_y = -Math.sin(a) * escala;
+  const T2_x = Math.cos(b) * escala;
+  const T2_y = -Math.sin(b) * escala;
+  const T3_x = 0;
+  const T3_y = escala;
 
-document.getElementById("form").addEventListener("submit", e => {
-  e.preventDefault();
-  const A = parseFloat(document.getElementById("anguloA").value);
-  const B = parseFloat(document.getElementById("anguloB").value);
-  const M = parseFloat(document.getElementById("masa").value);
-  const out = document.getElementById("resultado");
-
-  out.innerHTML = '';
-  const contRes = document.createElement('div');
-
-  try {
-    const { t1, t2, t3, a, b } = resolverTensiones(A, B, M);
-    contRes.innerHTML = `
-      <h2>Resultados</h2>
-      <p><strong>T1:</strong> ${Math.abs(t1).toFixed(2)} N</p>
-      <p><strong>T2:</strong> ${t2.toFixed(2)} N</p>
-      <p><strong>T3:</strong> ${t3.toFixed(2)} N</p>
-    `;
-
-    const canvas = document.createElement('canvas');
-    canvas.id = 'canvasGrafico';
-    canvas.width = 400;
-    canvas.height = 400;
-    contRes.appendChild(canvas);
-
-    out.appendChild(contRes);
-    graficarDirecciones(a, b);
-
-  } catch (err) {
-    contRes.innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
-    out.appendChild(contRes);
-  }
+  dibujarFlecha(centerX, centerY, centerX + T1_x, centerY + T1_y, "blue", "T1");
+  dibujarFlecha(centerX, centerY, centerX + T2_x, centerY + T2_y, "green", "T2");
+  dibujarFlecha(centerX, centerY, centerX + T3_x, centerY + T3_y, "red", "T3");
 });
