@@ -2,96 +2,83 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: #eef2f5;
+  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
 }
 
 .header {
-  background: #1a202c;
+  background-color: #1e1e1e;
   color: white;
-  padding: 1rem;
   text-align: center;
+  padding: 1.5rem 1rem;
 }
 
 .header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .header h2 {
-  margin: 0.2rem 0;
-  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
   font-weight: normal;
-  color: #a0aec0;
 }
 
-.header .social a {
-  color: #63b3ed;
+.social a {
+  color: #00acee;
   text-decoration: none;
-  display: inline-block;
-  margin-top: 0.5rem;
+  font-weight: bold;
 }
 
 .contenedor {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 90%;
-  margin: 0 auto;
+  justify-content: space-around;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 1rem;
 }
 
-.formulario,
-.resultado {
+.formulario, .resultado {
   flex: 1 1 45%;
-  min-width: 280px;
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 1rem;
 }
 
-.formulario h2,
-.resultado h2 {
-  margin-top: 0;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
-.formulario label {
-  display: block;
-  margin: 0.5rem 0 0.2rem;
+label {
+  margin-top: 0.5rem;
 }
 
-.formulario input {
-  width: 100%;
-  padding: 0.4rem;
-  margin-bottom: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+input, button {
+  padding: 0.5rem;
+  margin-top: 0.3rem;
 }
 
-.formulario button {
-  width: 100%;
-  padding: 0.6rem;
-  border: none;
-  background: #3182ce;
+button {
+  background-color: #1e1e1e;
   color: white;
-  font-size: 1rem;
-  border-radius: 4px;
+  border: none;
+  margin-top: 1rem;
   cursor: pointer;
 }
 
-.formulario button:hover {
-  background: #2b6cb0;
+button:hover {
+  background-color: #333;
 }
 
-.resultado canvas {
-  display: block;
-  width: 100%;
-  height: auto;
+.resultado img {
   margin-top: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
 }
+
