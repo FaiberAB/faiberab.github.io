@@ -27,7 +27,7 @@ document.getElementById("tensionForm").addEventListener("submit", function (e) {
   }
 
   const t2 = fsolve(ecuacionT2, 10);
-  const t1 = Math.abs((-Math.cos(b) * t2) / Math.cos(a)); 
+  const t1 = Math.abs((-Math.cos(b) * t2) / Math.cos(a));
   const t3 = peso;
 
   document.getElementById("t1").textContent = t1.toFixed(2);
@@ -43,7 +43,7 @@ document.getElementById("tensionForm").addEventListener("submit", function (e) {
 
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
-  const escala = 100;
+  const escala = 120;
 
   function dibujarFlecha(x0, y0, x1, y1, color, etiqueta) {
     ctx.beginPath();
