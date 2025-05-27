@@ -43,7 +43,7 @@ document.getElementById("tensionForm").addEventListener("submit", function (e) {
 
   const centerX = canvas.width / 2;
   const centerY = canvas.height / 2;
-  const escala = 120;
+  const escala = 140;
 
   function dibujarFlecha(x0, y0, x1, y1, color, etiqueta) {
     ctx.beginPath();
