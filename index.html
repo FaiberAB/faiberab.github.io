@@ -8,15 +8,15 @@
 <body>
 
   <header class="header">
-    <h1>Calculadora de Tensiones</h1>
-    <h2>Faiber Ariza</h2>
-    <div class="social">
-      <a href="https://www.instagram.com/faiber._.ab/" target="_blank">@faiber._.ab</a>
+    <h1 class="fade-in">Calculadora de Tensiones</h1>
+    <h2 class="fade-in-slow">Faiber Ariza</h2>
+    <div class="social fade-in-slow">
+      <a href="https://www.instagram.com/fainer._.ab/" target="_blank">Instagram: @fainer._.ab</a>
     </div>
   </header>
 
   <main class="contenedor">
-    <section class="formulario">
+    <section class="formulario fade-in">
       <h2>Ingresa los datos</h2>
       <form id="tensionForm">
         <label>Ángulo A (°):</label>
@@ -29,14 +29,15 @@
       </form>
     </section>
 
-    <section class="resultado" id="resultado" style="display:none;">
+    <section class="resultado fade-in-slow" id="resultado" style="display:none;">
       <h2>Resultados</h2>
-      <p><strong>T1:</strong> <span id="t1"></span> N</p>
-      <p><strong>T2:</strong> <span id="t2"></span> N</p>
-      <p><strong>T3:</strong> <span id="t3"></span> N</p>
-      <p><strong>Ángulo T1:</strong> <span id="anguloT1"></span>°</p>
-      <p><strong>Ángulo T2:</strong> <span id="anguloT2"></span>°</p>
-      <canvas id="grafico" width="300" height="300"></canvas>
+      <p><strong>T1:</strong> <span id="t1"></span> N (<span id="anguloT1"></span>°)</p>
+      <p><strong>T2:</strong> <span id="t2"></span> N (<span id="anguloT2"></span>°)</p>
+      <p><strong>T3:</strong> <span id="t3"></span> N (90°)</p>
+
+      <div class="grafico-box">
+        <canvas id="grafico" width="360" height="360"></canvas>
+      </div>
     </section>
   </main>
 
